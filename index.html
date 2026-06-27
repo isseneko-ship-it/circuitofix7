@@ -3,9 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CircuitoFix — Assistência Técnica de Eletrônicos</title>
-<meta name="description" content="Reparo de eletrônicos com diagnóstico transparente. Celulares, notebooks, consoles e placas. Orçamento sem compromisso.">
+<title>Contato — CircuitoFix</title>
+<meta name="description" content="Solicite um orçamento ou tire dúvidas sobre o reparo do seu aparelho.">
 <link rel="stylesheet" href="assets/style.css">
+<style>
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .contact-info-list { display: flex; flex-direction: column; gap: 22px; margin-top: 28px; }
+  .info-item { display: flex; gap: 14px; align-items: flex-start; }
+  .info-icon {
+    width: 38px; height: 38px; flex-shrink: 0; border-radius: var(--radius);
+    background: rgba(255,138,61,0.08); display: flex; align-items: center; justify-content: center;
+  }
+  .info-item h4 { font-size: 14.5px; margin-bottom: 2px; }
+  .info-item p, .info-item a { font-size: 14.5px; color: var(--text-muted); }
+  .info-item a:hover { color: var(--accent); }
+
+  form { display: flex; flex-direction: column; gap: 16px; }
+  .field label { display: block; font-size: 13.5px; color: var(--text-muted); margin-bottom: 6px; }
+  .field input, .field select, .field textarea {
+    width: 100%; background: var(--panel-raised); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 12px 14px; color: var(--text);
+    font-family: var(--font-body); font-size: 15px; transition: border-color 0.2s ease;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none; border-color: var(--accent);
+  }
+  .field textarea { resize: vertical; min-height: 110px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  #form-feedback {
+    font-size: 14px; color: var(--ok); margin-top: 4px; opacity: 0; transition: opacity 0.3s ease; min-height: 20px;
+  }
+  #form-feedback.show { opacity: 1; }
+
+  .form-divider {
+    display: flex; align-items: center; gap: 12px; margin: 4px 0;
+    font-size: 12.5px; color: var(--text-faint); font-family: var(--font-mono); text-transform: uppercase;
+  }
+  .form-divider::before, .form-divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+
+  .btn-whatsapp {
+    background: #25D366; color: #0B0E11; width: 100%; justify-content: center;
+  }
+  .btn-whatsapp:hover { background: #2EE579; }
+  .form-actions { display: flex; flex-direction: column; gap: 14px; }
+
+  @media (max-width: 820px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .field-row { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
 
@@ -22,169 +71,120 @@
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6H21M3 12H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
     <div class="nav-links">
-      <a href="index.html" class="active">Início</a>
+      <a href="index.html">Início</a>
       <a href="sobre.html">Sobre</a>
       <a href="portfolio.html">Portfólio</a>
-      <a href="contato.html">Contato</a>
+      <a href="contato.html" class="active">Contato</a>
       <a href="contato.html" class="nav-cta">Solicitar orçamento</a>
     </div>
   </nav>
 </header>
 
 <main>
-
-  <!-- HERO: diagrama de trilha de PCB conectando os elementos -->
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy reveal">
-        <div class="eyebrow">Diagnóstico em até 24h</div>
-        <h1>Seu aparelho parou.<br>A gente acha o curto.</h1>
-        <p class="hero-sub">Reparo de celulares, notebooks, consoles e placas eletrônicas com diagnóstico claro antes de qualquer conserto — você só paga pelo que aprovar.</p>
-        <div class="hero-actions">
-          <a href="contato.html" class="btn btn-primary">Solicitar orçamento</a>
-          <a href="portfolio.html" class="btn btn-ghost">Ver reparos já feitos</a>
-        </div>
-        <div class="hero-trust">
-          <div class="hero-trust-item"><strong>+1.200</strong><span>aparelhos recuperados</span></div>
-          <div class="hero-trust-item"><strong>90 dias</strong><span>de garantia no serviço</span></div>
-          <div class="hero-trust-item"><strong>24-48h</strong><span>diagnóstico médio</span></div>
-        </div>
-      </div>
-
-      <div class="hero-visual reveal">
-        <svg viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg" class="pcb-art">
-          <!-- trilhas -->
-          <path d="M40 60H140V140H220V60H320" stroke="#232931" stroke-width="2"/>
-          <path d="M40 60H140V140H220V60H320" stroke="#FF8A3D" stroke-width="2" stroke-dasharray="6 6" class="trace trace-1"/>
-          <path d="M40 300H120V220H260V300H320" stroke="#232931" stroke-width="2"/>
-          <path d="M40 300H120V220H260V300H320" stroke="#FF8A3D" stroke-width="2" stroke-dasharray="6 6" class="trace trace-2"/>
-          <path d="M180 40V120" stroke="#232931" stroke-width="2"/>
-          <path d="M180 240V320" stroke="#232931" stroke-width="2"/>
-          <!-- componentes -->
-          <rect x="150" y="140" width="60" height="60" rx="4" stroke="#FF8A3D" stroke-width="1.6" fill="#13171C"/>
-          <circle cx="180" cy="170" r="14" stroke="#4ADE80" stroke-width="1.6" fill="none"/>
-          <circle cx="40" cy="60" r="4" fill="#FF8A3D"/>
-          <circle cx="320" cy="60" r="4" fill="#FF8A3D"/>
-          <circle cx="40" cy="300" r="4" fill="#FF8A3D"/>
-          <circle cx="320" cy="300" r="4" fill="#FF8A3D"/>
-          <rect x="20" y="44" width="40" height="32" rx="3" stroke="#5A6470" stroke-width="1.4" fill="none"/>
-          <rect x="300" y="284" width="40" height="32" rx="3" stroke="#5A6470" stroke-width="1.4" fill="none"/>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVIÇOS — resumo, vocabulário de OS -->
-  <section class="section">
+  <section class="section-tight">
     <div class="wrap">
       <div class="section-head reveal">
-        <div class="eyebrow">O que reparamos</div>
-        <h2>Da tela trincada à placa-mãe morta</h2>
-        <p>Atendemos as falhas mais comuns — e as mais raras — com peças testadas e laudo técnico em todo orçamento.</p>
+        <div class="eyebrow">Fale com a gente</div>
+        <h2>Conte o defeito, a gente te diz o que fazer</h2>
+        <p>Responda o formulário com o máximo de detalhes possível — isso já acelera o diagnóstico.</p>
       </div>
 
-      <div class="services-grid reveal">
-        <div class="card service-card">
-          <div class="service-icon">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="6" y="2" width="12" height="20" rx="2" stroke="#FF8A3D" stroke-width="1.6"/><line x1="10" y1="19" x2="14" y2="19" stroke="#FF8A3D" stroke-width="1.6" stroke-linecap="round"/></svg>
-          </div>
-          <h3>Smartphones</h3>
-          <p class="text-muted">Troca de tela, bateria, conector de carga, reparo de placa e recuperação após contato com líquido.</p>
+      <div class="contact-grid">
+        <div class="reveal">
+          <form id="contact-form" novalidate action="https://formspree.io/f/SEU_CODIGO_AQUI" method="POST">
+            <div class="field-row">
+              <div class="field">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" required placeholder="Seu nome completo">
+              </div>
+              <div class="field">
+                <label for="telefone">Telefone / WhatsApp</label>
+                <input type="tel" id="telefone" name="telefone" required placeholder="(00) 00000-0000">
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="aparelho">Tipo de aparelho</label>
+              <select id="aparelho" name="aparelho" required>
+                <option value="" disabled selected>Selecione</option>
+                <option value="celular">Celular / smartphone</option>
+                <option value="notebook">Notebook</option>
+                <option value="console">Console de videogame</option>
+                <option value="placa">Placa eletrônica</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="defeito">Descreva o defeito</label>
+              <textarea id="defeito" name="defeito" required placeholder="Ex: o aparelho não liga desde que caiu no chão, faz três dias..."></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Enviar por e-mail</button>
+
+              <div class="form-divider">ou</div>
+
+              <button type="button" id="whatsapp-btn" class="btn btn-whatsapp">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 21C12 21 19 15.5 19 10A7 7 0 005 10C5 15.5 12 21 12 21Z" stroke="#0B0E11" stroke-width="0" fill="#0B0E11" opacity="0"/><path d="M17.6 14.2C17.4 14.6 16.5 15.4 15.5 15.6C14.6 15.8 13.5 15.9 10.5 14.6C7.2 13.2 5.2 9.8 5 9.5C4.9 9.3 4 8.1 4 6.8C4 5.5 4.7 4.9 5 4.6C5.2 4.4 5.5 4.3 5.8 4.3H6.6C6.9 4.3 7.1 4.3 7.3 4.8C7.5 5.3 8 6.5 8 6.7C8.1 6.8 8.1 7 8 7.2C7.5 8.1 7 8 7.2 8.4C7.9 9.6 8.6 10.2 9.7 10.8C9.9 10.9 10 10.9 10.2 10.7C10.4 10.5 10.9 9.9 11.1 9.6C11.3 9.4 11.5 9.4 11.7 9.5C11.9 9.6 13.1 10.2 13.3 10.3C13.5 10.4 13.7 10.5 13.7 10.6C13.9 11.4 13.7 13.8 17.6 14.2Z" fill="#0B0E11"/></svg>
+                Enviar pelo WhatsApp
+              </button>
+            </div>
+
+            <p id="form-feedback" role="status"></p>
+          </form>
         </div>
-        <div class="card service-card">
-          <div class="service-icon">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="12" rx="1.5" stroke="#FF8A3D" stroke-width="1.6"/><line x1="2" y1="20" x2="22" y2="20" stroke="#FF8A3D" stroke-width="1.6" stroke-linecap="round"/></svg>
+
+        <div class="reveal">
+          <div class="card">
+            <h3 style="font-size: 17px; margin-bottom: 4px;">Prefere falar direto?</h3>
+            <p class="text-muted" style="font-size: 14.5px; margin-bottom: 0;">Esses canais têm resposta mais rápida para casos urgentes.</p>
           </div>
-          <h3>Notebooks</h3>
-          <p class="text-muted">Reparo de placa-mãe, troca de teclado e tela, upgrade de SSD/memória e limpeza de superaquecimento.</p>
-        </div>
-        <div class="card service-card">
-          <div class="service-icon">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="2" y="8" width="20" height="9" rx="4" stroke="#FF8A3D" stroke-width="1.6"/><circle cx="17" cy="12.5" r="1.4" fill="#FF8A3D"/></svg>
+
+          <div class="contact-info-list">
+            <div class="info-item">
+              <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 4H9L11 9L8.5 10.5C9.5 13 11 14.5 13.5 15.5L15 13L20 15V19C20 20.1 19.1 21 18 21C10.3 21 4 14.7 4 7C4 5.9 4.9 5 5 4Z" stroke="#FF8A3D" stroke-width="1.5"/></svg>
+              </div>
+              <div>
+                <h4>WhatsApp / Telefone</h4>
+                <a href="tel:+5513991707972">(13) 99170-7972</a>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#FF8A3D" stroke-width="1.5"/><path d="M3 7L12 13L21 7" stroke="#FF8A3D" stroke-width="1.5"/></svg>
+              </div>
+              <div>
+                <h4>E-mail</h4>
+                <a href="mailto:isseneko@gmail.com">isseneko@gmail.com</a>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 21C12 21 19 15.5 19 10A7 7 0 005 10C5 15.5 12 21 12 21Z" stroke="#FF8A3D" stroke-width="1.5"/><circle cx="12" cy="10" r="2.5" stroke="#FF8A3D" stroke-width="1.5"/></svg>
+              </div>
+              <div>
+                <h4>Endereço</h4>
+                <p>Rua Exemplo, 123 — Centro<br>Sua Cidade, UF</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#FF8A3D" stroke-width="1.5"/><path d="M12 7V12L15 14" stroke="#FF8A3D" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <div>
+                <h4>Horário</h4>
+                <p>Segunda a sábado, 9h às 18h</p>
+              </div>
+            </div>
           </div>
-          <h3>Consoles</h3>
-          <p class="text-muted">PS, Xbox e Switch: travamento, superaquecimento, leitor de disco e dock com defeito.</p>
-        </div>
-        <div class="card service-card">
-          <div class="service-icon">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="#FF8A3D" stroke-width="1.6"/><path d="M9 9H15M9 12H15M9 15H12" stroke="#FF8A3D" stroke-width="1.6" stroke-linecap="round"/></svg>
-          </div>
-          <h3>Placas e componentes</h3>
-          <p class="text-muted">Diagnóstico de curto, troca de componentes SMD e recuperação de placas que ninguém quis olhar.</p>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- COMO FUNCIONA — ordem de serviço real, não números genéricos -->
-  <section class="section section-os">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div class="eyebrow">Como funciona</div>
-        <h2>Sua ordem de serviço, do início ao fim</h2>
-        <p>O mesmo fluxo que usamos na bancada — sem letras miúdas.</p>
-      </div>
-
-      <div class="os-list reveal">
-        <div class="os-item">
-          <span class="status status-ok">Recebido</span>
-          <p>Você traz o aparelho ou agenda a coleta. Abrimos a OS e registramos o defeito relatado.</p>
-        </div>
-        <div class="os-item">
-          <span class="status status-progress">Em diagnóstico</span>
-          <p>Testamos o aparelho na bancada e identificamos a causa real — não só o sintoma.</p>
-        </div>
-        <div class="os-item">
-          <span class="status status-wait">Aguardando aprovação</span>
-          <p>Enviamos o orçamento detalhado por WhatsApp. Nada é feito sem sua confirmação.</p>
-        </div>
-        <div class="os-item">
-          <span class="status status-ok">Concluído</span>
-          <p>Reparo feito, testado e com 90 dias de garantia. Você retira ou recebe em casa.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA final -->
-  <section class="section cta-final">
-    <div class="wrap cta-final-inner reveal">
-      <h2>Não force a barra com o aparelho.</h2>
-      <p>Quanto antes a gente olhar, menor a chance de o defeito virar coisa grande.</p>
-      <a href="contato.html" class="btn btn-primary">Solicitar orçamento agora</a>
-    </div>
-  </section>
-
 </main>
 
 <footer>
   <div class="wrap">
     <div class="footer-grid">
-      <div class="footer-col">
-        <h4>CircuitoFix</h4>
-        <p>Assistência técnica especializada em celulares, notebooks, consoles e placas eletrônicas.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Navegação</h4>
-        <a href="index.html">Início</a>
-        <a href="sobre.html">Sobre</a>
-        <a href="portfolio.html">Portfólio</a>
-        <a href="contato.html">Contato</a>
-      </div>
-      <div class="footer-col">
-        <h4>Contato</h4>
-        <a href="tel:+5513999888542">(13) 99888-542</a>
-        <a href="mailto:iseneko@gmail.com">iseneko@gmail.com</a>
-        <p>Seg–Sáb · 9h–18h</p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 CircuitoFix</span>
-      <span>Edite estes dados em todos os arquivos .html</span>
-    </div>
-  </div>
-</footer>
-
-<script src="assets/script.js"></script>
-</body>
-</html>
