@@ -37,10 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
     revealEls.forEach((el) => el.classList.add('in-view'));
   }
 
-  // Formulário de contato (demo — sem backend)
+  // Formulário de contato — envia para o Formspree (e-mail)
   const form = document.querySelector('#contact-form');
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const feedback = document.querySelector('#form-feedback');
       const btn = form.querySelector('button[type="submit"]');
@@ -49,15 +49,33 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.textContent = 'Enviando...';
       btn.disabled = true;
 
-      setTimeout(() => {
-        form.reset();
-        btn.textContent = originalText;
-        btn.disabled = false;
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+
+        if (response.ok) {
+          form.reset();
+          if (feedback) {
+            feedback.textContent = 'Pedido enviado por e-mail! Retornamos em breve pelo telefone informado.';
+            feedback.style.color = 'var(--ok)';
+            feedback.classList.add('show');
+          }
+        } else {
+          throw new Error('Falha no envio');
+        }
+      } catch (err) {
         if (feedback) {
-          feedback.textContent = 'Mensagem enviada. Retornamos em breve pelo contato informado.';
+          feedback.textContent = 'Não foi possível enviar por e-mail agora. Tente pelo botão do WhatsApp acima.';
+          feedback.style.color = 'var(--warn)';
           feedback.classList.add('show');
         }
-      }, 900);
+      } finally {
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }
     });
   }
 });
