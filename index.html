@@ -188,3 +188,76 @@
 <footer>
   <div class="wrap">
     <div class="footer-grid">
+      <div class="footer-col">
+        <h4>CircuitoFix</h4>
+        <p>Assistência técnica especializada em celulares, notebooks, consoles e placas eletrônicas.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <a href="index.html">Início</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="portfolio.html">Portfólio</a>
+        <a href="contato.html">Contato</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <a href="tel:+5513991707972">(13) 99170-7972</a>
+        <a href="mailto:isseneko@gmail.com">isseneko@gmail.com</a>
+        <p>Seg–Sáb · 9h–18h</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 CircuitoFix</span>
+      <span>Edite estes dados em todos os arquivos .html</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/script.js"></script>
+<script>
+  // ---- Configuração: número de WhatsApp do negócio ----
+  // Formato: 55 (Brasil) + DDD + número, só dígitos
+  const WHATSAPP_NUMERO = "5513991707972";
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('#contact-form');
+    const whatsappBtn = document.querySelector('#whatsapp-btn');
+
+    function getFormData() {
+      return {
+        nome: form.nome.value.trim(),
+        telefone: form.telefone.value.trim(),
+        aparelho: form.aparelho.options[form.aparelho.selectedIndex]?.text || '',
+        defeito: form.defeito.value.trim(),
+      };
+    }
+
+    function validar(data) {
+      if (!data.nome || !data.telefone || !form.aparelho.value || !data.defeito) {
+        alert('Preencha todos os campos antes de enviar.');
+        return false;
+      }
+      return true;
+    }
+
+    // Botão WhatsApp: monta a mensagem com os dados do formulário e abre o WhatsApp
+    if (whatsappBtn) {
+      whatsappBtn.addEventListener('click', () => {
+        const data = getFormData();
+        if (!validar(data)) return;
+
+        const mensagem =
+          `Olá! Quero um orçamento.%0A%0A` +
+          `*Nome:* ${encodeURIComponent(data.nome)}%0A` +
+          `*Telefone:* ${encodeURIComponent(data.telefone)}%0A` +
+          `*Aparelho:* ${encodeURIComponent(data.aparelho)}%0A` +
+          `*Defeito:* ${encodeURIComponent(data.defeito)}`;
+
+        const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${mensagem}`;
+        window.open(url, '_blank');
+      });
+    }
+  });
+</script>
+</body>
+</html>
